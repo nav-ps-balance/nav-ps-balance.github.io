@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Navigating the Proximity-Safety Balance: Constraint Decomposition for Human Following in Pedestrian Crowds</title>
+    <meta name="description" content="Navigating the Proximity-Safety Balance: Constraint Decomposition for Human Following in Pedestrian Crowds">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bulma-myscope.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script src="js/bulma-carousel.min.js"></script>
+    <script src="js/bulma-slider.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/app.js"></script>
+
+    <style>
+        .nav-pills {
+          position: relative;
+          display: inline;
+        }
+        .imtip {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main">
+        <div class="row mt-4">
+            <h2 class="col-md-12 text-center">
+                Navigating the Proximity-Safety Balance:</br>Constraint Decomposition for Human Following in Pedestrian Crowds
+            </h2>
+        </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <span>
+            <ul class="list-inline">
+                <li><a href="//gst0312.github.io/">Shiting Gong</a><sup>1,*</sup></li>
+                <li><a href="//jyao97.github.io">Jianpeng Yao</a><sup>2,*</sup></li>
+                <li>Jinfeng Wang<sup>3</sup></li>
+                <li><a href="https://web.stanford.edu/~pavone/index.html">Marco Pavone</a><sup>4</sup></li>
+                <li><a href="https://jiachenli94.github.io/">Jiachen Li</a><sup>2,&dagger;</sup></li>
+            </ul>
+            </span>
+            <p style="font-size: 16px; margin-top: -8px;">
+                <sup>1</sup>University of Pennsylvania &nbsp;&nbsp;
+                <sup>2</sup>University of California, Riverside &nbsp;&nbsp;
+                <sup>3</sup>Jilin University &nbsp;&nbsp;
+                <sup>4</sup>Stanford University
+            </p>
+            <p style="font-size: 14px; margin-top: -6px;">
+                <sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>&dagger;</sup> Corresponding author
+            </p>
+        </div>
+    </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-md-2 text-center">
+                <a href="#">
+                    <img src="img/paper_img.png" height="45px">
+                    <h4><strong>Paper</strong></h4>
+                </a>
+            </div>
+            <div class="col-md-2 text-center">
+                <a href="#">
+                    <img src="img/youtube_icon.png" height="45px">
+                    <h4><strong>Video</strong></h4>
+                </a>
+            </div>
+            <div class="col-md-2 text-center">
+                <a href="#">
+                    <img src="img/github.png" height="45px">
+                    <h4><strong>Code</strong></h4>
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <br>
+                <h5 class="text-justify text-center">
+                    A multi-constraint reinforcement learning framework that decomposes human following into independently tunable cost constraints, explicitly balancing proximity to the target against safety among dense and unpredictable pedestrian crowds.
+                </h5>
+                <br>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <h3 class="mt-4 mb-2">
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Following a target human in crowded environments involves an inherent conflict between staying close to the target and navigating safely among surrounding pedestrians and obstacles. This conflict becomes more severe in dense scenarios, where aggressive following risks collisions and conservative margins lead to target loss, especially when pedestrian behaviors are unfamiliar or unpredictable. Existing reinforcement learning (RL) methods typically encode these competing objectives into a single dense reward, but the resulting proximity-safety balance is implicit and difficult to adjust across conditions. To address this, we decompose the human-following task into a sparse task reward and independent cost constraints within a multi-constraint RL formulation, where each constraint is managed through cost thresholds with direct behavioral meaning rather than implicit reward weight ratios, allowing explicit and tunable control over the trade-off. We further quantify the prediction uncertainty of human motions and integrate these estimates into the RL costs to enhance safety under unpredictable conditions. Extensive experiments across both in-distribution and out-of-distribution settings demonstrate that our method achieves an effective proximity-safety balance compared to baselines. Real-robot deployment further validates the feasibility of our method in real-world scenarios. Real robot demonstrations are provided in the supplementary video.
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <br>
+                <h3>
+                    Key Ideas and Contributions
+                </h3>
+                <p class="text-justify">
+                    <strong>1) Constraint Decomposition for Explicit Trade-off Control</strong>: We propose a framework that decomposes human-following objectives into a sparse task reward and independent cost constraints, with the trade-off managed through behaviorally meaningful cost thresholds and jointly optimized using PPO-Lagrangian. <br>
+                    <strong>2) Uncertainty-Aware Safe Following</strong>: We integrate prediction uncertainty of human motions into the observation space and cost formulation, and design a unified policy network with spatial constraint reasoning to enable safe human following under uncertain and dynamic pedestrian environments. <br>
+                    <strong>3) Comprehensive Evaluation and Real-World Deployment</strong>: We extend CrowdNav with static obstacles and conduct extensive evaluations with varying crowd densities, pedestrian behaviors, and environment layouts, and deploy on a real robot under the ROS 2 setup to validate real-world effectiveness. <br>
+                </p>
+            </div>
+            <br>
+        </div>
+        <br>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-12">
+                    <textarea id="bibtex" class="form-control" rows="6" readonly>
+@article{gong2026navigating,
+    title={Navigating the Proximity-Safety Balance: Constraint Decomposition for Human Following in Pedestrian Crowds},
+    author={Gong, Shiting and Yao, Jianpeng and Wang, Jinfeng and Pavone, Marco and Li, Jiachen},
+    year={2026}
+}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
