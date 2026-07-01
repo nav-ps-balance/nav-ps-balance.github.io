@@ -34,6 +34,93 @@
           top: 0;
           left: 0;
         }
+
+        /* ---- Refinements for a cleaner, more polished look ---- */
+        body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          color: #1a1a1a;
+        }
+        #main { max-width: 1000px; }
+        h2.col-md-12 {
+          font-weight: 700;
+          line-height: 1.28;
+          letter-spacing: -0.4px;
+          margin-bottom: 0.2em;
+        }
+        .list-inline > li { font-size: 18px; }
+        h3 {
+          font-weight: 700;
+          letter-spacing: -0.2px;
+          margin-top: 1.4rem;
+          margin-bottom: 0.5rem;
+        }
+        h5.text-justify { line-height: 1.6; color: #333; }
+        p.text-justify { line-height: 1.75; font-size: 16px; }
+
+        /* media link buttons (Paper / Video / Code) */
+        .link-buttons a {
+          color: #363636;
+          display: inline-block;
+          transition: transform .15s ease, color .15s ease;
+        }
+        .link-buttons a:hover { color: #f09228; transform: translateY(-2px); }
+        .link-buttons h4 { margin-top: 6px; font-size: 18px; }
+
+        /* figures & videos */
+        figure.fig { margin: 1.5rem auto 0.5rem; text-align: center; }
+        figure.fig img,
+        figure.fig video {
+          max-width: 100%;
+          height: auto;
+          border-radius: 10px;
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+        }
+        figure.fig figcaption {
+          font-size: 14px;
+          color: #555;
+          margin-top: 0.7rem;
+          line-height: 1.5;
+        }
+        /* narrower figure (e.g. the tall critics diagram) */
+        figure.fig-narrow img { max-width: 560px; width: 100%; }
+
+        /* results tables (booktabs-like, matching the LaTeX tables) */
+        .results-table {
+          margin: 0.5rem auto 0.25rem;
+          font-size: 15px;
+          width: auto;
+          min-width: 90%;
+        }
+        .results-table caption {
+          caption-side: top;
+          text-align: center;
+          font-weight: 600;
+          color: #333;
+          padding: 0 0 0.5rem;
+          font-size: 15px;
+        }
+        .results-table th,
+        .results-table td {
+          text-align: center;
+          vertical-align: middle;
+          padding: 0.35rem 0.6rem;
+        }
+        .results-table thead th { border-bottom: 1.5px solid #adadad; }
+        .results-table thead tr:first-child th { border-top: 1.5px solid #adadad; }
+        .results-table tbody tr:last-child td { border-bottom: 1.5px solid #adadad; }
+        .results-table td:first-child,
+        .results-table th:first-child { text-align: left; white-space: nowrap; }
+        .results-table .group-sep > * { border-top: 1px solid #d9d9d9; }
+        .results-table .row-ours { background: #eef4ff; }
+        .results-table .row-ours td { font-weight: 600; }
+        .results-table .sub th { font-weight: 600; font-size: 13.5px; color: #444; }
+        .results-table td.tl { text-align: left; white-space: nowrap; }
+
+        /* Media slots stay hidden until their asset actually loads,
+           so dropping a correctly-named file into img/ or videos/
+           makes the section appear automatically (no code edits). */
+        .auto-media { display: none; }
     </style>
 </head>
 <body>
@@ -50,16 +137,16 @@
             <ul class="list-inline">
                 <li><a href="//gst0312.github.io/">Shiting Gong</a><sup>1,*</sup></li>
                 <li><a href="//jyao97.github.io">Jianpeng Yao</a><sup>2,*</sup></li>
-                <li>Jinfeng Wang<sup>3</sup></li>
-                <li><a href="https://web.stanford.edu/~pavone/index.html">Marco Pavone</a><sup>4</sup></li>
-                <li><a href="https://jiachenli94.github.io/">Jiachen Li</a><sup>2,&dagger;</sup></li>
+                <li>Jinfeng Wang<sup>2</sup></li>
+                <li><a href="https://web.stanford.edu/~pavone/index.html">Marco Pavone</a><sup>3</sup></li>
+                <li><a href="https://jiachenli94.github.io/">Jiachen Li</a><sup>4,&dagger;</sup></li>
             </ul>
             </span>
             <p style="font-size: 16px; margin-top: -8px;">
                 <sup>1</sup>University of Pennsylvania &nbsp;&nbsp;
                 <sup>2</sup>University of California, Riverside &nbsp;&nbsp;
-                <sup>3</sup>Jilin University &nbsp;&nbsp;
-                <sup>4</sup>Stanford University
+                <sup>3</sup>Stanford University &nbsp;&nbsp;
+                <sup>4</sup>Georgia Institute of Technology
             </p>
             <p style="font-size: 14px; margin-top: -6px;">
                 <sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>&dagger;</sup> Corresponding author
@@ -67,7 +154,7 @@
         </div>
     </div>
         <br>
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center link-buttons">
             <div class="col-md-2 text-center">
                 <a href="#">
                     <img src="img/paper_img.png" height="45px">
@@ -114,11 +201,185 @@
                 <h3>
                     Key Ideas and Contributions
                 </h3>
+                <figure class="fig auto-media">
+                    <img src="img/overview.png" alt="Method overview">
+                    <figcaption>
+                        Overview of our method. The state is processed by a unified policy network and optimized with four critics under a constrained RL framework using PPO-Lagrangian.
+                    </figcaption>
+                </figure>
+                <figure class="fig fig-narrow auto-media">
+                    <img src="img/critics.png" alt="Interaction among the critics">
+                    <figcaption>
+                        Interaction among the critics and the generation of the action loss.
+                    </figcaption>
+                </figure>
                 <p class="text-justify">
                     <strong>1) Constraint Decomposition for Explicit Trade-off Control</strong>: We propose a framework that decomposes human-following objectives into a sparse task reward and independent cost constraints, with the trade-off managed through behaviorally meaningful cost thresholds and jointly optimized using PPO-Lagrangian. <br>
                     <strong>2) Uncertainty-Aware Safe Following</strong>: We integrate prediction uncertainty of human motions into the observation space and cost formulation, and design a unified policy network with spatial constraint reasoning to enable safe human following under uncertain and dynamic pedestrian environments. <br>
                     <strong>3) Comprehensive Evaluation and Real-World Deployment</strong>: We extend CrowdNav with static obstacles and conduct extensive evaluations with varying crowd densities, pedestrian behaviors, and environment layouts, and deploy on a real robot under the ROS 2 setup to validate real-world effectiveness. <br>
                 </p>
+            </div>
+            <br>
+        </div>
+        <br>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <h3>
+                    Quantitative Results
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-sm results-table">
+                        <caption>Table 1. In-Distribution Test Results</caption>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Method</th>
+                                <th rowspan="2">SR &uarr;</th>
+                                <th colspan="3">CR &darr;</th>
+                                <th rowspan="2">TLR &darr;</th>
+                                <th rowspan="2">AFD</th>
+                            </tr>
+                            <tr class="sub">
+                                <th>Overall</th>
+                                <th>Human</th>
+                                <th>Obstacle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SG-HA*</td><td>1.84%</td><td>81.52%</td><td>79.92%</td><td><strong>1.60%</strong></td><td>16.64%</td><td>1.91</td>
+                            </tr>
+                            <tr>
+                                <td>SG-ORCA</td><td>17.68%</td><td>64.88%</td><td>27.84%</td><td>37.04%</td><td>17.44%</td><td>1.65</td>
+                            </tr>
+                            <tr>
+                                <td>SG-MPC</td><td>30.96%</td><td>42.72%</td><td>30.08%</td><td>12.64%</td><td>26.32%</td><td>2.64</td>
+                            </tr>
+                            <tr>
+                                <td>OGM-HEIGHT</td><td>52.32%</td><td>34.72%</td><td>21.44%</td><td>13.28%</td><td>12.96%</td><td>2.19</td>
+                            </tr>
+                            <tr class="group-sep">
+                                <td>RL</td><td>68.00%</td><td>24.08%</td><td>15.76%</td><td>8.32%</td><td>7.92%</td><td>2.24</td>
+                            </tr>
+                            <tr>
+                                <td>RL+ACI</td><td>71.60%</td><td>20.72%</td><td>12.80%</td><td>7.92%</td><td>7.68%</td><td>2.28</td>
+                            </tr>
+                            <tr class="group-sep row-ours">
+                                <td>Ours</td><td><strong>78.08%</strong></td><td><strong>16.16%</strong></td><td><strong>10.72%</strong></td><td><strong>5.44%</strong></td><td><strong>5.76%</strong></td><td>2.35</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm results-table">
+                            <caption>Table 2. Effect of Constraint Tuning vs. Reward Weight Tuning</caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Intent</th>
+                                    <th rowspan="2">Method</th>
+                                    <th rowspan="2">SR &uarr;</th>
+                                    <th colspan="2">CR &darr;</th>
+                                    <th rowspan="2">TLR &darr;</th>
+                                    <th rowspan="2">AFD</th>
+                                </tr>
+                                <tr class="sub"><th>Overall</th><th>Human</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row-ours"><td rowspan="2">Safety</td><td class="tl">Ours (δ<sub>F</sub>=4.0, δ<sub>H</sub>=3.2)</td><td>71.68%</td><td>18.24%</td><td><strong>8.80%</strong></td><td>10.08%</td><td>2.54</td></tr>
+                                <tr><td class="tl">RL+ACI (w<sub>H</sub>×2)</td><td>71.60%</td><td>20.72%</td><td>12.80%</td><td>7.68%</td><td>2.28</td></tr>
+                                <tr class="group-sep row-ours"><td rowspan="2">Following</td><td class="tl">Ours (δ<sub>F</sub>=3.2, δ<sub>H</sub>=4.0)</td><td>74.40%</td><td>22.40%</td><td>14.24%</td><td><strong>3.20%</strong></td><td>2.23</td></tr>
+                                <tr><td class="tl">RL+ACI (w<sub>F</sub>×2)</td><td>63.92%</td><td>27.36%</td><td>15.44%</td><td>8.72%</td><td>2.26</td></tr>
+                                <tr class="group-sep row-ours"><td rowspan="2">Balanced</td><td class="tl">Ours (δ<sub>F</sub>=3.6, δ<sub>H</sub>=3.6)</td><td><strong>78.08%</strong></td><td><strong>16.16%</strong></td><td>10.72%</td><td>5.76%</td><td>2.35</td></tr>
+                                <tr><td class="tl">RL+ACI (w<sub>F</sub>=w<sub>H</sub>=1)</td><td>70.80%</td><td>21.12%</td><td>12.88%</td><td>8.08%</td><td>2.26</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <br>
+                    <div class="table-responsive">
+                        <table class="table table-sm results-table">
+                            <caption>Table 3. Out-of-Distribution Test Results</caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Environment</th>
+                                    <th rowspan="2">Method</th>
+                                    <th rowspan="2">SR &uarr;</th>
+                                    <th colspan="3">CR &darr;</th>
+                                    <th rowspan="2">TLR &darr;</th>
+                                    <th rowspan="2">AFD</th>
+                                </tr>
+                                <tr class="sub"><th>Overall</th><th>Human</th><th>Obstacle</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td rowspan="7">Corridor</td><td class="tl">SG-HA*</td><td>2.64%</td><td>88.64%</td><td>88.56%</td><td><strong>0.08%</strong></td><td>8.72%</td><td>1.46</td></tr>
+                                <tr><td class="tl">SG-ORCA</td><td>50.64%</td><td>47.20%</td><td>25.28%</td><td>21.92%</td><td>2.16%</td><td>1.48</td></tr>
+                                <tr><td class="tl">SG-MPC</td><td>48.88%</td><td>39.20%</td><td>37.04%</td><td>2.16%</td><td>11.92%</td><td>1.84</td></tr>
+                                <tr><td class="tl">OGM-HEIGHT</td><td>56.24%</td><td>37.60%</td><td>28.96%</td><td>8.64%</td><td>6.16%</td><td>1.50</td></tr>
+                                <tr><td class="tl">RL</td><td>77.52%</td><td>21.84%</td><td>21.04%</td><td>0.80%</td><td>0.64%</td><td>1.50</td></tr>
+                                <tr><td class="tl">RL+ACI</td><td>82.96%</td><td>16.72%</td><td>15.12%</td><td>1.60%</td><td><strong>0.32%</strong></td><td>1.53</td></tr>
+                                <tr class="row-ours"><td class="tl">Ours</td><td><strong>89.76%</strong></td><td><strong>8.64%</strong></td><td><strong>8.48%</strong></td><td>0.16%</td><td>1.60%</td><td>1.78</td></tr>
+                                <tr class="group-sep"><td rowspan="7">15% Rushing Humans</td><td class="tl">SG-HA*</td><td>0.16%</td><td>93.68%</td><td>92.72%</td><td><strong>0.96%</strong></td><td>6.16%</td><td>1.93</td></tr>
+                                <tr><td class="tl">SG-ORCA</td><td>12.48%</td><td>81.76%</td><td>37.28%</td><td>44.48%</td><td>5.76%</td><td>1.39</td></tr>
+                                <tr><td class="tl">SG-MPC</td><td>15.76%</td><td>72.48%</td><td>57.84%</td><td>14.64%</td><td>11.76%</td><td>2.66</td></tr>
+                                <tr><td class="tl">OGM-HEIGHT</td><td>47.04%</td><td>38.08%</td><td>26.56%</td><td>11.52%</td><td>14.88%</td><td>2.22</td></tr>
+                                <tr><td class="tl">RL</td><td>61.60%</td><td>35.36%</td><td>27.36%</td><td>8.00%</td><td><strong>3.04%</strong></td><td>2.15</td></tr>
+                                <tr><td class="tl">RL+ACI</td><td>68.48%</td><td>28.48%</td><td>23.04%</td><td>5.44%</td><td><strong>3.04%</strong></td><td>2.18</td></tr>
+                                <tr class="row-ours"><td class="tl">Ours</td><td><strong>70.56%</strong></td><td><strong>22.72%</strong></td><td><strong>19.36%</strong></td><td>3.36%</td><td>6.72%</td><td>2.23</td></tr>
+                                <tr class="group-sep"><td rowspan="7">SF Pedestrian Model</td><td class="tl">SG-HA*</td><td>0.72%</td><td>84.88%</td><td>84.08%</td><td><strong>0.80%</strong></td><td>14.40%</td><td>1.74</td></tr>
+                                <tr><td class="tl">SG-ORCA</td><td>22.24%</td><td>68.80%</td><td>14.40%</td><td>54.40%</td><td>8.96%</td><td>1.53</td></tr>
+                                <tr><td class="tl">SG-MPC</td><td>29.60%</td><td>45.92%</td><td>31.20%</td><td>14.72%</td><td>24.48%</td><td>2.43</td></tr>
+                                <tr><td class="tl">OGM-HEIGHT</td><td>35.84%</td><td>50.40%</td><td>22.88%</td><td>27.52%</td><td>13.76%</td><td>2.16</td></tr>
+                                <tr><td class="tl">RL</td><td>56.96%</td><td>40.96%</td><td>21.28%</td><td>19.68%</td><td>2.08%</td><td>2.15</td></tr>
+                                <tr><td class="tl">RL+ACI</td><td>60.64%</td><td>34.48%</td><td>21.68%</td><td>12.80%</td><td>4.88%</td><td>2.19</td></tr>
+                                <tr class="row-ours"><td class="tl">Ours</td><td><strong>64.32%</strong></td><td><strong>33.68%</strong></td><td><strong>20.08%</strong></td><td>13.60%</td><td><strong>2.00%</strong></td><td>2.21</td></tr>
+                                <tr class="group-sep"><td rowspan="7">Groups</td><td class="tl">SG-HA*</td><td>0.08%</td><td>92.64%</td><td>92.64%</td><td>0.00%</td><td>7.28%</td><td>1.83</td></tr>
+                                <tr><td class="tl">SG-ORCA</td><td>27.68%</td><td>46.48%</td><td>46.48%</td><td>0.00%</td><td>25.84%</td><td>1.86</td></tr>
+                                <tr><td class="tl">SG-MPC</td><td>26.88%</td><td>64.08%</td><td>64.08%</td><td>0.00%</td><td>9.04%</td><td>2.43</td></tr>
+                                <tr><td class="tl">OGM-HEIGHT</td><td>36.32%</td><td>53.28%</td><td>53.28%</td><td>0.00%</td><td>10.40%</td><td>2.09</td></tr>
+                                <tr><td class="tl">RL</td><td>49.36%</td><td>46.64%</td><td>46.64%</td><td>0.00%</td><td><strong>4.00%</strong></td><td>1.87</td></tr>
+                                <tr><td class="tl">RL+ACI</td><td>56.00%</td><td>39.20%</td><td>39.20%</td><td>0.00%</td><td>4.80%</td><td>2.17</td></tr>
+                                <tr class="row-ours"><td class="tl">Ours</td><td><strong>59.68%</strong></td><td><strong>32.64%</strong></td><td><strong>32.64%</strong></td><td>0.00%</td><td>7.68%</td><td>2.14</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <p class="text-justify" style="font-size: 14px; color: #555;">
+                    SR: success rate; CR: collision rate (overall / with humans / with obstacles); TLR: target-lost rate; AFD: average following distance. Best in each column is in bold.
+                </p>
+            </div>
+            <br>
+        </div>
+        <br>
+
+        <div class="row justify-content-md-center auto-media">
+            <div class="col-md-12 col-lg-10">
+                <h3>
+                    Qualitative Results
+                </h3>
+                <figure class="fig">
+                    <img src="img/qualitative.jpg" alt="Qualitative results across scenarios">
+                    <figcaption>
+                        Visualization of test results. Regular pedestrians are shown in blue, the target in red, and the robot in orange; light-blue circles are uncertainty-derived safety buffers.
+                        (a) Ours in-distribution. (b) OGM-HEIGHT fails the same episode. (c) OOD narrow corridor. (d) OOD rushing humans. (e) OOD social-force model. (f) OOD pedestrian groups.
+                    </figcaption>
+                </figure>
+            </div>
+            <br>
+        </div>
+        <br>
+
+        <!-- Real-world demo: drop a video named  videos/demo.mp4  to show this section -->
+        <div class="row justify-content-md-center auto-media">
+            <div class="col-md-12 col-lg-10">
+                <h3>
+                    Real-World Experiments
+                </h3>
+                <figure class="fig">
+                    <video autoplay controls muted loop playsinline preload="metadata">
+                        <source src="videos/demo.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>
+                        Zero-shot deployment on a ROSMASTER X3 robot following a target human through pedestrians and static obstacles.
+                    </figcaption>
+                </figure>
             </div>
             <br>
         </div>
@@ -142,5 +403,28 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>hljs.highlightAll();</script>
+    <script>
+        // Reveal an .auto-media slot only once its image/video successfully loads.
+        // This lets you add figures/videos just by dropping correctly-named files
+        // into img/ or videos/ — no HTML edits required.
+        (function () {
+            function reveal(el) {
+                var block = el.closest('.auto-media');
+                if (block) block.classList.remove('auto-media');
+            }
+            document.querySelectorAll('.auto-media img').forEach(function (img) {
+                if (img.complete && img.naturalWidth > 0) {
+                    reveal(img);
+                } else {
+                    img.addEventListener('load', function () {
+                        if (img.naturalWidth > 0) reveal(img);
+                    });
+                }
+            });
+            document.querySelectorAll('.auto-media video').forEach(function (v) {
+                v.addEventListener('loadedmetadata', function () { reveal(v); });
+            });
+        })();
+    </script>
 </body>
 </html>
